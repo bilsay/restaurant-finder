@@ -1,0 +1,27 @@
+<h1>{{title}}</h1>
+<p>Welcome to {{title}}</p>
+
+<p>Dette er en partial:</p>
+<div id="searchbox">
+<form>
+    <input type="text" placeholder="Search..." required>
+    <input type="button" value="Search">
+</form>
+
+{{#form "/search" class="form"}} 
+	{{input "firstname" person.name}}
+	{{submit "save" "Submit form"}}
+{{/form}}
+
+{{#shortResultText}}
+	Results for {{shortResultText}}
+{{/shortResultText}}
+
+{{#restaurants}}
+	<div>
+		{{name}}
+	</div>
+{{/restaurants}}
+
+</div>
+<hr>
