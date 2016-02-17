@@ -1,4 +1,4 @@
-@import 'reset';
+@import "reset";
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 $justEatRed: #CE0B10;
@@ -20,6 +20,10 @@ a {
 
 #search-results {
 	background: #FFFFFF;
+}
+
+#search-empty-results {
+    padding: 1em;
 }
 
 .restaurant {

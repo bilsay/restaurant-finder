@@ -23,7 +23,7 @@ var getCamelizedObject = function(o) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Search with your postcode' });
+  res.render('index', { title: 'Search restaurants with your postcode' });
 });
 
 router.get('/search', function(req, res, next) {
@@ -42,6 +42,8 @@ router.get('/search', function(req, res, next) {
 
         var results = camelize(JSON.parse(body));
 
+        console.log (results);
+
         jsonfile.writeFile('justeat-result.json', results, function(err) {
           
           if (err) {
@@ -50,17 +52,28 @@ router.get('/search', function(req, res, next) {
         });
 
         res.render('index', { 
-          title: 'Search with your postcode', 
+          title: format('Restaurants near {0}', postCode), 
           postCode: postCode,
           shortResultText: results.shortResultText,
-          restaurants: results.restaurants 
+          restaurants: results.restaurants,
+          errorMessage: (!results.restaurants || 0 == results.restaurants.length) 
+                          ? format("No results for '{0}'.. Please make sure it is a valid postcode.", postCode)
+                          : null
+        });
+      } else {
+        res.render('index', { 
+          title: 'Search restaurants with your postcode', 
+          postCode: postCode,
+          shortResultText: results.shortResultText,
+          restaurants: results.restaurants,
+          errorMessage: "Service unavailable"
         });
       }
     });
   } else {
 
     console.log ('Post code does not exists');
-    res.render('index', { title: 'Search with a postcode' });
+    res.render('index', { title: 'Search restaurants with your postcode' });
   }
 });
 

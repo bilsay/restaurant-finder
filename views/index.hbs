@@ -1,6 +1,6 @@
 <div id="search-box">
 	<div class="container">
-		<h1>{{title}}</h1>
+		<h1>Search with your postcode:</h1>
 
 		<div>
 			{{#form "/search" class="form" method="get"}} 
@@ -64,9 +64,11 @@
 			</li>
 		{{/restaurants}}
 		</ol>
-	{{else}}
-		<div class="text-info">
-			No results for "{{postCode}}".. Please make sure it is a valid postcode.
+	{{/if}}
+
+	{{#if errorMessage}}
+		<div id="search-empty-results" class="text-info">
+			{{errorMessage}}
 		</div>
 	{{/if}}
 </div>
