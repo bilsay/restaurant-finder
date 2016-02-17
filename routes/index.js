@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
-var $ = require('jquery');
+var camelize = require('penrillian-camelize');
+var format = require('string-format');
+var jsonfile = require('jsonfile');
 
 var justEatApiCallOptions = {
   url: 'https://public.je-apis.com/restaurants?q=se19',
@@ -13,56 +15,53 @@ var justEatApiCallOptions = {
   }
 };
 
-var firstToUpper = function(str) {
+var getCamelizedObject = function(o) {
 
-    return str.charAt(0).toUpperCase() + str.slice(1);
+  var res = camelize(o);
+  return JSON.stringify(res, null, 2);
 };
-
-var mapToJsObject = function(o) {
-
-    var r = {};
-    $.map(o, function(item, index) {
-        r[firstToLower(index)] = o[index];
-    });
-    return r;
-};
-
-function callback(error, response, body) {
-  if (!error && response.statusCode == 200) {
-    var info = JSON.parse(body);
-    console.log(info.stargazers_count + " Stars");
-    console.log(info.forks_count + " Forks");
-  }
-}
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Search with your postcode' });
 });
 
-router.post('/search', function(req, res, next) {
-	
+router.get('/search', function(req, res, next) {
 
-	var postCode = req.param('postCode');
+  var postCode = req.query.postCode;
 
-  	justEatApiCallOptions.qs = { q: postCode };
+  if (postCode) {
+    
+    console.log (format('Fetching results for {0}', postCode));
 
-	request(justEatApiCallOptions, function (error, response, body) {
+    justEatApiCallOptions.qs = { q: postCode };
 
-		if (!error && response.statusCode == 200) {
+    request(justEatApiCallOptions, function (error, response, body) {
 
-			var results = mapToJsObject(JSON.parse(body));
+      if (!error && response.statusCode == 200) {
 
+        var results = camelize(JSON.parse(body));
 
-  			res.render('index', { 
-  				title: 'Express', 
-  				shortResultText: results.shortResultText,
-  				restaurants: results.restaurants 
-  			});
-		}
+        jsonfile.writeFile('justeat-result.json', results, function(err) {
+          
+          if (err) {
+            console.error('error writing justeat-result.json');
+          }
+        });
 
-		$('body')
-	});
+        res.render('index', { 
+          title: 'Search with your postcode', 
+          postCode: postCode,
+          shortResultText: results.shortResultText,
+          restaurants: results.restaurants 
+        });
+      }
+    });
+  } else {
+
+    console.log ('Post code does not exists');
+    res.render('index', { title: 'Search with a postcode' });
+  }
 });
 
 module.exports = router;

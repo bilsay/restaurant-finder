@@ -1,27 +1,74 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<div id="search-box">
+	<div class="container">
+		<h1>{{title}}</h1>
 
-<p>Dette er en partial:</p>
-<div id="searchbox">
-<form>
-    <input type="text" placeholder="Search..." required>
-    <input type="button" value="Search">
-</form>
-
-{{#form "/search" class="form"}} 
-	{{input "firstname" person.name}}
-	{{submit "save" "Submit form"}}
-{{/form}}
-
-{{#shortResultText}}
-	Results for {{shortResultText}}
-{{/shortResultText}}
-
-{{#restaurants}}
-	<div>
-		{{name}}
+		<div>
+			{{#form "/search" class="form" method="get"}} 
+				<div class="input-group">
+					{{input "postCode" postCode class="form-control"}}
+					<span class="input-group-btn">
+						{{submit "search" "Search" class="btn btn-default"}}
+					</span>
+				</div><!-- /input-group -->
+			{{/form}}
+		</div>
 	</div>
-{{/restaurants}}
-
 </div>
-<hr>
+
+<div id="search-results" class="container">
+
+	{{#if shortResultText}}
+		<h2>
+			Results for {{shortResultText}}
+		</h2>
+	{{/if}}
+
+	{{#if restaurants}}
+		<ol class="restaurants">
+		{{#restaurants}}
+			<li class="row restaurant 
+						{{#if isOpenNow}}is-open-now{{else}}is-not-open-now{{/if}}">
+
+				{{#logo}}
+					<div class="col-lg-1 col-xs-5">
+						<img src="{{standardResolutionUrl}}" class="img-responsive" alt="{{name}}">
+					</div>
+				{{/logo}}
+
+				<div class="col-lg-11  col-xs-7">
+					<a href="{{url}}" target="_blank" class="name">
+						{{name}}
+						{{#unless isOpenNow}}
+							<span class="text-danger">(Closed)</span>
+						{{/unless}}
+					</a>
+
+					{{#isHalal}}
+						<span class="text-info">Helal</span>
+					{{/isHalal}}
+
+					<div class="address">{{address}}, {{postcode}}</div>
+					<dl class="dl-horizontal">
+					  <dt>Rating:</dt>
+					  <dd>{{ratingStars}} <span class="text-info">({{numberOfRatings}})</span></dd>
+					  <dt>Cousine Types:</dt>
+					  <dd>
+						<ul class="cousine-types">
+						{{#cuisineTypes}}
+							<li class="cousine-type">{{name}}</li>
+						{{/cuisineTypes}}
+						</ul>
+					  </dd>
+					</dl>
+				</div>
+			</li>
+		{{/restaurants}}
+		</ol>
+	{{else}}
+		<div class="text-info">
+			No results for "{{postCode}}".. Please make sure it is a valid postcode.
+		</div>
+	{{/if}}
+</div>
+
+

@@ -1,13 +1,51 @@
 @import 'reset';
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+$justEatRed: #CE0B10;
 
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #EEEEEE;
+  color: #666666;
  }
 
 a {
-	color: #00B7FF;
+	color: #1DA1F2;
 }
 
+#search-box {
+	background: $justEatRed;
+	color: #fff;
+	padding-bottom: 1em;
+}
 
-.osman { color: #fff; }
+#search-results {
+	background: #FFFFFF;
+}
+
+.restaurant {
+
+	padding-top: 0.8em;
+	border-bottom: 1px solid #F0F0F0;
+
+	&.is-open-now {
+		opacity: 1;
+	}
+
+	&:nth-child(2n) {
+	} 
+
+	&.is-not-open-now {
+	  background-color: #F7F6F6;
+	}
+
+	.name {
+		font-size: 1.5em;
+	}
+}
+
+.btn-default {
+    background: #fec752;
+    border-color: #fec752;
+    color: #333;
+    line-height: 1.429;
+}
