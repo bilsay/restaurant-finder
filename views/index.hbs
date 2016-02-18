@@ -1,11 +1,11 @@
 <div id="search-box">
 	<div class="container">
-		<h1>Search with your postcode:</h1>
+		<h1>Search restaurants:</h1>
 
 		<div>
 			{{#form "/search" class="form" method="get"}} 
 				<div class="input-group">
-					{{input "postCode" postCode class="form-control"}}
+					{{input "postCode" searchInputValue class="form-control"}}
 					<span class="input-group-btn">
 						{{submit "search" "Search" class="btn btn-default"}}
 					</span>
@@ -30,12 +30,12 @@
 						{{#if isOpenNow}}is-open-now{{else}}is-not-open-now{{/if}}">
 
 				{{#logo}}
-					<div class="col-lg-1 col-xs-5">
+					<div class="col-lg-1 col-xs-3">
 						<img src="{{standardResolutionUrl}}" class="img-responsive" alt="{{name}}">
 					</div>
 				{{/logo}}
 
-				<div class="col-lg-11  col-xs-7">
+				<div class="col-lg-11  col-xs-9">
 					<a href="{{url}}" target="_blank" class="name">
 						{{name}}
 						{{#unless isOpenNow}}
