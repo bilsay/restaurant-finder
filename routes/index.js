@@ -29,6 +29,14 @@ router.get('/', function(req, res, next) {
   });
 });
 
+var handleSearchSuccess = function (res, body) {
+
+}
+
+var handleSearchError = function () {
+
+}
+
 router.get('/search', function(req, res, next) {
 
   var postCode = req.query.postCode;
@@ -45,8 +53,6 @@ router.get('/search', function(req, res, next) {
 
         var results = camelize(JSON.parse(body));
 
-        console.log (results);
-
         jsonfile.writeFile('justeat-result.json', results, function(err) {
           
           if (err) {
@@ -54,12 +60,14 @@ router.get('/search', function(req, res, next) {
           }
         });
 
+        //If there 
         res.render('index', { 
           title: format('Restaurants near {0}', postCode), 
           postCode: postCode,
           shortResultText: results.shortResultText,
           restaurants: results.restaurants,
           searchInputValue: postCode, 
+          //In case there are no results display error message
           errorMessage: (!results.restaurants || 0 == results.restaurants.length) 
                           ? format("No results for '{0}'.. Please make sure it is a valid postcode.", postCode)
                           : null
@@ -77,11 +85,7 @@ router.get('/search', function(req, res, next) {
     });
   } else {
 
-    console.log ('Post code does not exists');
-    res.render('index', { 
-      title: 'Search restaurants',
-      searchInputValue: "Postcode"  
-    });
+    res.redirect ('/');
   }
 });
 

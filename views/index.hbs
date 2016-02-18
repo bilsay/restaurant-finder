@@ -1,11 +1,13 @@
 <div id="search-box">
 	<div class="container">
-		<h1>Search restaurants:</h1>
+		<h1>Search restaurants</h1>
 
 		<div>
 			{{#form "/search" class="form" method="get"}} 
 				<div class="input-group">
-					{{input "postCode" searchInputValue class="form-control"}}
+					{{input "postCode" searchInputValue class="form-control" 
+							 onblur="if (this.value == '') {this.value = 'Postcode';}"
+							 onfocus="if (this.value == 'Postcode') {this.value = '';}"}}
 					<span class="input-group-btn">
 						{{submit "search" "Search" class="btn btn-default"}}
 					</span>
@@ -43,12 +45,10 @@
 						{{/unless}}
 					</a>
 
-					{{#isHalal}}
-						<span class="text-info">Helal</span>
-					{{/isHalal}}
 
 					<div class="address">{{address}}, {{postcode}}</div>
-					<dl class="dl-horizontal">
+
+					<dl class="">
 					  <dt>Rating:</dt>
 					  <dd>{{ratingStars}} <span class="text-info">({{numberOfRatings}})</span></dd>
 					  <dt>Cousine Types:</dt>
