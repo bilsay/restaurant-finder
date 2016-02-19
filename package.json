@@ -33,7 +33,6 @@
     "penrillian-camelize": "^1.0.0",
     "request": "^2.69.0",
     "serve-favicon": "~2.3.0",
-    "star-rating": "0.0.1",
     "string-format": "^0.5.0",
     "underscore": "^1.8.3",
     "webcomponents": "^0.1.4"

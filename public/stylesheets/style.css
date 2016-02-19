@@ -3,6 +3,8 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+@import url(../../lib/bootstrap-star-rating/css/star-rating.css);
+@import url(../../lib/bootstrap-star-rating/css/theme-krajee-svg.css);
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
@@ -5865,14 +5867,29 @@ a {
   padding: 1em; }
 
 .restaurant {
-  padding-top: 0.8em;
+  padding: 1em 0;
   border-bottom: 1px solid #F0F0F0; }
   .restaurant.is-open-now {
     opacity: 1; }
   .restaurant.is-not-open-now {
-    background-color: #F7F6F6; }
+    background-color: #FBDDDD;
+    border-color: #FBC2C2; }
   .restaurant .name {
     font-size: 1.5em; }
+  .restaurant .rating-container,
+  .restaurant .rating-text {
+    display: inline-block;
+    vertical-align: middle; }
+  .restaurant .rating {
+    opacity: 0; }
+  .restaurant .rating-container .rating {
+    opacity: 1; }
+  .restaurant .rating-disabled .rating,
+  .restaurant .rating-container .star {
+    cursor: default; }
+  .restaurant .cousine-type {
+    display: inline-block;
+    padding: 0 4px; }
 
 .btn-default {
   background: #fec752;

@@ -1,13 +1,11 @@
 <div id="search-box">
 	<div class="container">
-		<h1>Search restaurants</h1>
+		<h1>Search restaurants by postcode: </h1>
 
 		<div>
 			{{#form "/search" class="form" method="get"}} 
 				<div class="input-group">
-					{{input "postCode" searchInputValue class="form-control" 
-							 onblur="if (this.value == '') {this.value = 'Postcode';}"
-							 onfocus="if (this.value == 'Postcode') {this.value = '';}"}}
+					{{input "postCode" "" class="form-control"}}
 					<span class="input-group-btn">
 						{{submit "search" "Search" class="btn btn-default"}}
 					</span>
@@ -45,21 +43,34 @@
 						{{/unless}}
 					</a>
 
+					<div class="address">{{address}} {{city}}, {{postcode}}</div>
+					
+					<div>
+						<input type="number" 
+							   class="rating krajee-fa" 
+							   data-min=1 
+							   data-max=6 
+							   data-stars=6
+							   value={{ratingStars}} 
+							   data-size="xs" 
+							   data-show-caption="false"
+							   data-show-clear="false"
+							   data-readonly="true"
+							   data-rtl="false">
 
-					<div class="address">{{address}}, {{postcode}}</div>
-
-					<dl class="">
-					  <dt>Rating:</dt>
-					  <dd>{{ratingStars}} <span class="text-info">({{numberOfRatings}})</span></dd>
-					  <dt>Cousine Types:</dt>
-					  <dd>
-						<ul class="cousine-types">
+						<span class="rating-text">
+							{{ratingStars}} ({{numberOfRatings}})
+						</span>
+					</div>
+					<ul class="cousine-types">
 						{{#cuisineTypes}}
-							<li class="cousine-type">{{name}}</li>
+							<li class="cousine-type bg-info">{{name}}</li>
 						{{/cuisineTypes}}
-						</ul>
-					  </dd>
-					</dl>
+
+						{{#isHalal}}
+							<li class="cousine-type bg-info">Halal</li>
+						{{/isHalal}}
+					</ul>
 				</div>
 			</li>
 		{{/restaurants}}

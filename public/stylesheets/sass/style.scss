@@ -1,5 +1,7 @@
 @import "reset";
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "../../lib/bootstrap-star-rating/css/star-rating.css";
+@import "../../lib/bootstrap-star-rating/css/theme-krajee-svg.css";
 
 $justEatRed: #CE0B10;
 
@@ -28,22 +30,44 @@ a {
 
 .restaurant {
 
-	padding-top: 0.8em;
+	padding: 1em 0;
 	border-bottom: 1px solid #F0F0F0;
 
 	&.is-open-now {
 		opacity: 1;
 	}
 
-	&:nth-child(2n) {
-	} 
-
 	&.is-not-open-now {
-	  background-color: #F7F6F6;
+	    background-color: #FBDDDD;
+	    border-color: #FBC2C2;
 	}
 
 	.name {
 		font-size: 1.5em;
+	}
+
+	.rating-container,
+	.rating-text {
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	.rating {
+		opacity: 0;
+	}
+
+	.rating-container .rating {
+		opacity: 1;
+	}
+
+	.rating-disabled .rating,
+	.rating-container .star {
+		cursor: default;
+	}
+
+	.cousine-type {
+		display: inline-block;
+		padding: 0 4px;
 	}
 }
 
