@@ -32,36 +32,6 @@
         "home": "Karsiyaka",
         "sea": "Aegean Sea"
     },
-    "sports": {
-        "plays": [
-            {
-                "name": "Basketball",
-                "level": 5
-            },
-            {
-                "name": "Football",
-                "level": 3.5,
-                "description": "Does not follow football but would play if you threw him a ball"
-            },
-            {
-                "name": "Voleyball",
-                "level": 3.5,
-                "description": "Only on the beach"
-            },
-            {
-                "name": "Tenis",
-                "level": 3.5,
-                "description": "Only if you threw him a ball"
-            },
-            {
-                "name": "Table tenis",
-                "level": 4,
-                "description": "Very good in summer time, skills were never tested during winter."
-            }
-        ],
-        "follows": [],
-        "supports": "Karsiyaka"
-    },
     "music": {
         "listensTo": {
             "spotifyUri": "https://player.spotify.com/user/bilsay",
@@ -101,6 +71,7 @@
             "soundCloudUrl": "soundcloud.com/bilsay"
         }
     },
+    
     "books": {
         "lastsRead": {
             "name": "The Fall",
@@ -167,6 +138,37 @@
             "lang": "Spanish",
             "level": 3
         }
-    ]
+    ],
+
+    "sports": {
+        "plays": [
+            {
+                "name": "Basketball",
+                "level": 5
+            },
+            {
+                "name": "Football",
+                "level": 3.5,
+                "description": "Does not follow football but would play if you threw him a ball"
+            },
+            {
+                "name": "Voleyball",
+                "level": 3.5,
+                "description": "Only on the beach"
+            },
+            {
+                "name": "Tenis",
+                "level": 3.5,
+                "description": "Only if you threw him a ball"
+            },
+            {
+                "name": "Table tenis",
+                "level": 4,
+                "description": "Very good in summer time, skills were never tested during winter."
+            }
+        ],
+        "follows": [],
+        "supports": "Karsiyaka"
+    }
 }
 ```
